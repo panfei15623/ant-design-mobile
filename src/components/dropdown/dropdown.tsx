@@ -38,11 +38,12 @@ export type DropdownRef = {
   close: () => void
 }
 
+// PropsWithChildren：并上 children 属性，交叉类型
 const Dropdown = forwardRef<
   DropdownRef,
   React.PropsWithChildren<DropdownProps>
 >((p, ref) => {
-  const props = mergeProps(defaultProps, p)
+  const props = mergeProps(defaultProps, p) // 合并 props，p 的属性是 undefined，使用 defaultProps
   const [value, setValue] = usePropsValue({
     value: props.activeKey,
     defaultValue: props.defaultActiveKey,
@@ -52,13 +53,13 @@ const Dropdown = forwardRef<
   const navRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  // 点击外部区域，关闭
+  // 监听目标元素外的点击事件,点击外部区域，关闭
   useClickAway(() => {
     if (!props.closeOnClickAway) return
     setValue(null)
   }, [navRef, contentRef])
 
-  // 计算 navs 的 top 值
+  // 计算 popup 的 top 值
   const [top, setTop] = useState<number>()
   const containerRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -66,7 +67,7 @@ const Dropdown = forwardRef<
     if (!container) return
     if (value) {
       const rect = container.getBoundingClientRect()
-      setTop(rect.bottom)
+      setTop(rect.bottom) // containerRef 底部到浏览器顶部的距离，不包含卷起的部分
     }
   }, [value])
 

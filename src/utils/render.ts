@@ -60,6 +60,7 @@ function concurrentRender(node: ReactElement, container: ContainerType) {
   container[MARK] = root
 }
 
+// TODO-PF react 版本
 export function render(node: ReactElement, container: ContainerType) {
   if (createRoot as unknown) {
     concurrentRender(node, container)
@@ -70,7 +71,8 @@ export function render(node: ReactElement, container: ContainerType) {
 
 // ========================== Unmount =========================
 function legacyUnmount(container: ContainerType) {
-  return unmountComponentAtNode(container)
+  // ReactDOM.unmountComponentAtNode() 方法只会卸载挂载到该容器上的 React 组件，不会移除容器本身。如果该容器上还有其他非 React 元素或组件，需要手动移除
+  return unmountComponentAtNode(container) // 用于卸载挂载到 DOM 节点上的 React 组件
 }
 
 async function concurrentUnmount(container: ContainerType) {

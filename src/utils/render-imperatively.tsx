@@ -59,7 +59,7 @@ export function renderImperatively(element: TargetElement) {
     })
   })
   const wrapperRef = React.createRef<ImperativeHandler>()
-  const unmount = renderToBody(<Wrapper ref={wrapperRef} />)
+  const unmount = renderToBody(<Wrapper ref={wrapperRef} />) // 返回卸载函数
   return {
     close: async () => {
       if (!wrapperRef.current) {

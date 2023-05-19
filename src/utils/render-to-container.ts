@@ -11,6 +11,8 @@ export function renderToContainer(
 ) {
   if (canUseDom && getContainer) {
     const container = resolveContainer(getContainer)
+
+    // createPortal 将子组件渲染到父组件的 DOM 层次结构之外, 用于创建弹出窗口、模态对话框等 UI 组件
     return createPortal(node, container) as ReactPortal
   }
   return node

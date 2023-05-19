@@ -112,6 +112,7 @@ export const CenterPopup: FC<CenterPopupProps> = p => {
           role={props.role}
           aria-label={props['aria-label']}
         >
+          {/* animated.div TODO-PF */}
           <animated.div style={style} ref={ref}>
             {props.showCloseButton && (
               <a
