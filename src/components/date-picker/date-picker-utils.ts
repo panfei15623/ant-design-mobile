@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import type { DatePrecision } from './date-picker-date-utils'
 import type { WeekPrecision } from './date-picker-week-utils'
 import * as dateUtils from './date-picker-date-utils'
@@ -43,8 +42,10 @@ export const convertDateToStringArray = (
   }
 }
 
-export const convertStringArrayToDate = (
-  value: (string | null | undefined)[],
+export const convertStringArrayToDate = <
+  T extends string | number | null | undefined
+>(
+  value: T[],
   precision: Precision
 ) => {
   // Special case for DATE_NOW
